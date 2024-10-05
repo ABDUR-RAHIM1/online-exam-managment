@@ -1,30 +1,46 @@
 "use client"
 import React from 'react'
 import { Fade } from 'react-slideshow-image';
-import 'react-slideshow-image/dist/styles.css'
+import 'react-slideshow-image/dist/styles.css';
+
+
+import Image from 'next/image';
+
 export default function Slider() {
+
+
     const slideImages = [
         {
-            url: 'https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80',
-            caption: 'Slide 1'
+            url: "/Images/sl1.jpg",
+            caption: "Bank Job Preparation"
         },
         {
-            url: 'https://images.unsplash.com/photo-1506710507565-203b9f24669b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1536&q=80',
-            caption: 'Slide 2'
+            url: "/Images/sl2.jpg",
+            caption: " NTRC Job Preparation"
         },
         {
-            url: 'https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80',
-            caption: 'Slide 3'
-        },
+            url: "/Images/sl3.jpg",
+            caption: "BCS Job Preparation"
+        }
     ];
 
     return (
-        <div className=" w-full  z-[-1]">
+        <div className="w-full z-[-1]">
             <Fade>
                 {slideImages.map((fadeImage, index) => (
-                    <div key={index} className='z-[-1] h-[80vh]'>
-                        <img style={{ width: '100%' }} className='z-[1] object-cover' src={fadeImage.url} />
-                        <h2>{fadeImage.caption}</h2>
+                    <div key={index} className='relative h-[50vh] md:h-[80vh] lg:h-[90vh]'>
+                        {/* Responsive image */}
+                        <Image
+                            src={fadeImage.url}
+                            alt={fadeImage.caption}
+                            width={500}
+                            height={500}
+                            className='w-full h-full object-cover z-[-1]'
+                        />
+                        {/* Caption */}
+                        <div className='absolute bottom-5 left-5 bg-black bg-opacity-50 text-white p-2 rounded'>
+                            <h2 className='text-lg md:text-2xl lg:text-3xl'>{fadeImage.caption}</h2>
+                        </div>
                     </div>
                 ))}
             </Fade>

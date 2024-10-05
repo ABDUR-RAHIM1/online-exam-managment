@@ -24,13 +24,18 @@ body {
 
   /*  common css */
   .wrap {
-    @apply px-5 md:px-10
+    @apply px-5 md:px-10 my-20 py-20
+  }
+
+  .cardTitle {
+    @apply  text-2xl md:text-3xl my-8 font-medium
   }
 
   .HomeNav {
-    @apply flex justify-center gap-6 font-medium text-2xl
+    @apply flex justify-center gap-6 font-medium text-xl
   }
-  .HomeNav a{
+
+  .HomeNav a {
     @apply hover:text-blue-500 duration-200
   }
 
