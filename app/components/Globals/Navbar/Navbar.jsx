@@ -1,5 +1,4 @@
-import React from 'react'
-import DesktopNavbar from './Desktop'
+import React from 'react' 
 import MobileNavbar from './Mobile'
 
 export default function Navbar() {

@@ -1,14 +1,20 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import { CiMenuFries } from "react-icons/ci"; // Importing a mobile menu icon
+import { CiMenuFries } from "react-icons/ci";
 import { FaBookOpen } from "react-icons/fa";
 
 export default function MobileNavbar() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false); // State to toggle mobile menu
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to toggle services dropdown
+    const path = usePathname()
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     const items = [
+        {
+            item: "Services",
+            path: "/services",
+        },
         {
             item: "Live Exam",
             path: "/live-exam",
@@ -55,30 +61,10 @@ export default function MobileNavbar() {
 
             {/* Desktop Navigation */}
             <nav className="HomeNav hidden md:flex items-center gap-6">
-                <div className="relative">
-                    <button
-                        onClick={() => setIsDropdownOpen(!isDropdownOpen)} // Toggle services dropdown on click
-                        className="focus:outline-none m-0 p-0"
-                    >
-                        Services
-                    </button>
 
-                    {/* Dropdown content with click toggle */}
-                    <div
-                        className={`${isDropdownOpen ? "max-h-60 scale-100" : "max-h-0 scale-0"
-                            } overflow-hidden transform transition-all duration-300 ease-in-out 
-                        absolute top-10 left-0 bg-gray-200 p-4 flex flex-col gap-4 z-[2] w-[200px] origin-top`}
-                    >
-                        {subItems.map((item, index) => (
-                            <Link href={item.path} key={index} className="hover:text-blue-500">
-                                {item.item}
-                            </Link>
-                        ))}
-                    </div>
-                </div>
 
                 {items.map((item, index) => (
-                    <Link href={item.path} key={index} className="hover:text-blue-500 duration-200">
+                    <Link href={item.path} key={index} className={`hover:text-blue-500 duration-200 ${path.includes(item.path) ? "text-blue-500" : ""}`}>
                         {item.item}
                     </Link>
                 ))}
@@ -118,7 +104,7 @@ export default function MobileNavbar() {
                         </Link>
                     ))}
 
-                    <Link href="/" className="hover:text-blue-500 duration-200">
+                    <Link href="/auth" className="hover:text-blue-500 duration-200">
                         Login/Sign up
                     </Link>
                 </div>
