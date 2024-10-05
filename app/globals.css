@@ -20,6 +20,23 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+@layer components {
+
+  /*  common css */
+  .wrap {
+    @apply px-5 md:px-10
+  }
+
+  .HomeNav {
+    @apply flex justify-center gap-6 font-medium text-2xl
+  }
+  .HomeNav a{
+    @apply hover:text-blue-500 duration-200
+  }
+
+  /*  common css End here*/
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
