@@ -83,7 +83,7 @@ export default function MobileNavbar() {
                     </Link>
                 ))}
 
-                <Link href="/" className="hover:text-blue-500 duration-200">
+                <Link href="/auth" className="hover:text-blue-500 duration-200">
                     Login/Sign up
                 </Link>
             </nav>
