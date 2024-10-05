@@ -1,6 +1,7 @@
 "use client"
 import { demoImg2, demoImg3 } from '@/app/DemoData/DemoImg';
 import Heading from '@/app/helpers/Heading';
+import Image from 'next/image';
 import React from 'react';
 import { Zoom } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'; // import slideshow styles
@@ -36,19 +37,21 @@ export default function Testimonials() {
                 <Zoom scale={0.4} cssClass="custom-slide">
                     {testimonials.map((testimonial, index) => (
                         <div key={index} className="p-8 py-16 bg-white rounded-lg shadow-md text-center mx-2">
-                            <img
+                            <Image
+                                width={500}
+                                height={500}
                                 src={testimonial.image}
                                 alt={testimonial.name}
                                 className="mx-auto mb-4 rounded-full w-20 h-20 object-cover"
                             />
                             {/* Testimonial Feedback */}
-                            <p className="text-lg italic">"{testimonial.feedback}"</p>
+                            <p className="text-lg italic">{testimonial.feedback}</p>
                             <h3 className="mt-4 text-xl font-semibold">{testimonial.name}</h3>
                             <p className="text-sm text-gray-500">{testimonial.date}</p>
                         </div>
                     ))}
                 </Zoom>
-            
+
             </div>
         </div>
     );
