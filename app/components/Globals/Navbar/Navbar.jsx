@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import { CiMenuFries } from "react-icons/ci";
+import { RiMenuFold3Fill } from "react-icons/ri";
 import { FaBookOpen } from "react-icons/fa";
 import ProfileNav from "./ProfileNav";
 
@@ -41,14 +41,14 @@ export default function MobileNavbar() {
     return (
         <div className=" px-5 md:px-10 flex justify-between items-center py-5 bg-gray-100   sticky top-0 z-[9999] w-full ">
             {/* Brand Logo */}
-            <Link href="/" className="text-4xl italic flex items-center gap-2 font-bold hover:text-blue-500 duration-200">
+            <Link href="/" className=" text-3xl md:text-4xl italic flex items-center gap-2 font-bold hover:text-blue-500 duration-200">
                 <FaBookOpen className="text-blue-500" /> Online Exam
             </Link>
 
             {/* Desktop and Mobile Menu Toggle Button */}
             <div className="md:hidden">
-                <CiMenuFries
-                    className="text-3xl text-blue-500 cursor-pointer"
+                <RiMenuFold3Fill
+                    className="text-4xl text-blue-500 cursor-pointer"
                     onClick={() => setIsMenuOpen(!isMenuOpen)} // Toggle mobile menu on click
                 />
             </div>
@@ -63,7 +63,7 @@ export default function MobileNavbar() {
                     </Link>
                 ))}
 
-                <div onClick={handleProfileClick} onBlur={handleProfileClick}  className=" cursor-pointer relative text-xl font-medium hover:text-blue-500 duration-200">
+                <div onClick={handleProfileClick} className=" cursor-pointer relative text-xl font-medium hover:text-blue-500 duration-200">
                     <Image
                         src={demoProfilePhoto}
                         width={200}
@@ -86,7 +86,7 @@ export default function MobileNavbar() {
                         </Link>
                     ))}
 
-                    <div onClick={handleProfileClick} onBlur={handleProfileClick} className=" cursor-pointer relative text-xl font-medium hover:text-blue-500 duration-200">
+                    <div onClick={handleProfileClick} className="w-full cursor-pointer relative text-xl font-medium hover:text-blue-500 duration-200">
                         <Image
                             src={demoProfilePhoto}
                             width={200}

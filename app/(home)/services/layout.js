@@ -15,7 +15,6 @@ export default function ServicesLayout({ children }) {
         <div className="flex">
             <Sidebar />
 
-            {/* Main Content */}
             <main className=" flex-1 h-screen overflow-y-auto scrollbar-hidden bg-gray-200 p-4">
                 {children}
             </main>
