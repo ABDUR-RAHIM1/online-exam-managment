@@ -6,7 +6,8 @@ const demoImg3 = "https://img.freepik.com/free-photo/young-bearded-man-with-stri
 
 const dummyPdf = "https://img.freepik.com/free-psd/vertical-poster-template-professional-business-growth_23-2149302672.jpg?t=st=1728127394~exp=1728130994~hmac=4d0597ebbaf3386257f5b70f965aec1fb817dba95cb9cf133e444d3ca2de6185&w=740"
 
+const demoProfilePhoto = "https://img.freepik.com/free-vector/smiling-young-man-glasses_1308-174702.jpg?t=st=1728188583~exp=1728192183~hmac=7cefb6bcc9da75c293565c1fcaaa4fcc44aedb172d2cd79da558f9d3c2a04b96&w=740"
 
 export {
-    demoImg, demoImg2, demoImg3, dummyPdf
+    demoImg, demoImg2, demoImg3, dummyPdf, demoProfilePhoto
 }

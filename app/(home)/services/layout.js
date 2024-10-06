@@ -1,4 +1,4 @@
-   
+
 import Sidebar from "./Sidebar";
 
 // Metadata for the page
@@ -10,13 +10,10 @@ export const metadata = {
 
 
 export default function ServicesLayout({ children }) {
-  
+
     return (
         <div className="flex">
-            {/* Sidebar */}
-            <aside className="w-[28%] p-4  h-screen bg-blue-500 text-white">
-                <Sidebar />
-            </aside>
+            <Sidebar />
 
             {/* Main Content */}
             <main className=" flex-1 h-screen overflow-y-auto scrollbar-hidden bg-gray-200 p-4">
