@@ -2,7 +2,7 @@ import Heading from '@/app/helpers/Heading';
 import React from 'react';
 
 export default function BcsPage() {
-    
+
     const bcsDemoData = Array.from({ length: 8 }, (_, index) => ({
         id: index + 1,
         category: `BCS Category ${index + 1}`,
@@ -18,11 +18,11 @@ export default function BcsPage() {
     return (
         <div className="px-4 py-8">
             <Heading text={"BCS Courses"} center={true} />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            <div className=" flex items-start flex-wrap justify-between gap-6 mt-8">
                 {bcsDemoData.map((item) => (
                     <div
                         key={item.id}
-                        className="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition duration-300 ease-in-out"
+                        className="w-[31%] bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition duration-300 ease-in-out"
                     >
                         <h3 className="text-xl font-semibold text-gray-800 mb-2">{item.category}</h3>
                         <p className="text-gray-600 mb-2">{item.description}</p>

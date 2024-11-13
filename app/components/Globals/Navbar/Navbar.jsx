@@ -19,10 +19,6 @@ export default function MobileNavbar() {
 
     const items = [
         {
-            item: "Services",
-            path: "/services",
-        },
-        {
             item: "Live Exam",
             path: "/live-exam",
         },
@@ -30,12 +26,43 @@ export default function MobileNavbar() {
             item: "Books",
             path: "/book-lists",
         },
-        {
-            item: "Login/Signup",
-            path: "/auth",
-        },
     ];
 
+    const dropdownItems = [
+        {
+            item: "Bcs",
+            path: "/services/bcs"
+        },
+        {
+            item: "Bank",
+            path: "/services/bank"
+        },
+        {
+            item: "Govt",
+            path: "/services/govt"
+        },
+        {
+            item: "Privete",
+            path: "/services/privete"
+        },
+        {
+            item: "Interview",
+            path: "/services/interview"
+        },
+    ]
+
+    const dropdownItems2 = [
+        {
+            item: "free Account",
+            // path: "/free-acount"
+            path: "/auth"
+        },
+        {
+            item: "Premium Account",
+            // path: "/premium-acount"
+            path: "/auth"
+        },
+    ]
 
 
     return (
@@ -54,14 +81,55 @@ export default function MobileNavbar() {
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="HomeNav hidden md:flex items-center gap-6">
+            <nav className="HomeNav hidden md:flex items-center">
 
+                <ul className="homeNav">
+                    <li className=" relative group cursor-pointer hover:bg-blue-500 hover:text-white px-4 py-2 rounded-md duration-200">Services
+                        <ul className=" absolute top-[25px] left-0 hidden flex-col space-y-3 p-3  group-hover:flex duration-300 ">
+                            <div className=" mt-2 bg-transparent" />
+                            <div className=" dropdownMenu bg-white p-4  w-[250px] flex flex-col  text-[17px] ">
+
+                                {
+                                    dropdownItems.map((item, index) => (
+                                        <li className=" w-full " key={index}>
+                                            <Link href={item.path} key={index} className=" w-full inline-block">
+                                                {item.item}
+                                            </Link>
+                                        </li>
+                                    ))
+                                }
+                            </div>
+                        </ul>
+
+                    </li>
+                </ul>
 
                 {items.map((item, index) => (
                     <Link href={item.path} key={index} className={` hover:text-blue-500 duration-200 ${path.includes(item.path) ? "text-blue-500" : ""}`}>
                         {item.item}
                     </Link>
                 ))}
+
+                <ul className="homeNav">
+                    <li className=" relative group cursor-pointer hover:bg-blue-500 hover:text-white px-4 py-2 rounded-md duration-200">Register
+                        <ul className=" absolute top-[25px] left-[-100px] hidden flex-col space-y-3 p-3  group-hover:flex duration-300 ">
+                            <div className=" mt-2 bg-transparent" />
+                            <div className=" dropdownMenu bg-white p-4  w-[220px] flex flex-col  text-[17px] ">
+
+                                {
+                                    dropdownItems2.map((item, index) => (
+                                        <li className=" w-full " key={index}>
+                                            <Link href={item.path} key={index} className=" w-full inline-block">
+                                                {item.item}
+                                            </Link>
+                                        </li>
+                                    ))
+                                }
+                            </div>
+                        </ul>
+
+                    </li>
+                </ul>
 
                 <div onClick={handleProfileClick} className=" cursor-pointer relative text-xl font-medium hover:text-blue-500 duration-200">
                     <Image

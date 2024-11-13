@@ -43,27 +43,35 @@ export default function Notice() {
                 {/*  right side */}
 
                 <div className='w-full md:w-[28%]  py-10 my-5 md:my-0 p-4 border-0 md:border-l border-gray-400'>
-                    <h2 className='text-lg font-bold mb-4'>Quick Links</h2>
-                    <ul className='list-disc list-inside mb-6'>
-                        <li><Link href="/upcoming-exams">Upcoming Exams</Link></li>
-                        <li><Link href="/study-resources">Study Resources</Link></li>
-                        <li><Link href="/contact">Contact Us</Link></li>
-                        <li><Link href="/support">Help Center</Link></li>
-                    </ul>
-
-                    <h2 className='text-lg font-bold mb-4'>Important Dates</h2>
-                    <ul className='mb-6'>
-                        <li>October 10th - Final Exam</li>
-                        <li>September 30th - Last date for hall ticket download</li>
-                    </ul>
+                    <div className='my-5'>
+                        <h2 className='text-lg font-bold mb-4'>Quick Links</h2>
+                        <ul className='list-disc list-inside mb-6'>
+                            <li><Link href="https://www.10minuteschool.com" target="_blank" rel="noopener noreferrer">10 Minute School</Link></li>
+                            <li><Link href="https://www.shikhbe.shobai" target="_blank" rel="noopener noreferrer">Shikhbe Shobai</Link></li>
+                            <li><Link href="https://www.bdjobstraining.com" target="_blank" rel="noopener noreferrer">Bdjobs Training</Link></li>
+                            <li><Link href="https://www.skill.jobs" target="_blank" rel="noopener noreferrer">Skill Jobs</Link></li>
+                            <li><Link href="https://www.sheiboi.com" target="_blank" rel="noopener noreferrer">Shei Boi</Link></li>
+                        </ul>
+                    </div>
 
 
+                    <div className=' my-5'>
+                        <h2 className='text-lg font-bold mb-4'>Subscribe for Updates</h2>
+                        <form>
+                            <input type="email" placeholder="Your Email" className='border p-2 mb-2 w-full' required />
+                            <button type="submit" className='bg-blue-500 text-white py-2 px-4 rounded'>Subscribe</button>
+                        </form>
+                    </div>
 
-                    <h2 className='text-lg font-bold mb-4'>Subscribe for Updates</h2>
-                    <form>
-                        <input type="email" placeholder="Your Email" className='border p-2 mb-2 w-full' required />
-                        <button type="submit" className='bg-blue-500 text-white py-2 px-4 rounded'>Subscribe</button>
-                    </form>
+                    {/* Google Ad Placeholder */}
+                    <div className="google-ad w-full h-40 bg-gray-200 flex items-center justify-center rounded-lg">
+                        {/* Placeholder text to represent ad space */}
+                        <span className="text-gray-600">Google Ad Placeholder</span>
+                    </div>
+
+
+
+
                 </div>
 
             </div>

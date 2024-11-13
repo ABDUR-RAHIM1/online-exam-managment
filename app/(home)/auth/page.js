@@ -152,7 +152,9 @@ const RegistrationPage = () => {
                 }
 
                 <button type="submit" className="bg-blue-500 my-6 font-bold text-white py-2 px-4 rounded hover:bg-blue-600">
-                    Register
+                    {
+                        isClick ? " login" : " Signup"
+                    }
                 </button>
             </form>
             <p className="text-center mt-4">

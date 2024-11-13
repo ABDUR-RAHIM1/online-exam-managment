@@ -12,11 +12,29 @@ export const metadata = {
 export default function ServicesLayout({ children }) {
 
     return (
-        <div className="flex">
-            <Sidebar />
+        // <div className="flex h-screen  overflow-hidden">
+        //     <Sidebar />
 
-            <main className=" flex-1 h-screen overflow-y-auto scrollbar-hidden bg-gray-200 p-4">
-                {children}
+        //     <main className=" flex-1  overflow-y-auto bg-gray-200 p-4">
+        //         {children}
+        //     </main>
+
+        // </div>
+        <div className="flex h-screen overflow-hidden">
+
+            {/* Sidebar */}
+            <aside className="w-[300px] overflow-y-auto bg-blue-900 text-white flex flex-col items-start p-4 space-y-6">
+                <Sidebar />
+            </aside>
+
+            {/* Main Content */}
+            <main className="flex-1 overflow-y-auto p-8 bg-gray-100">
+
+
+                {/* Children content */}
+                <section className="mt-8">
+                    {children}
+                </section>
             </main>
         </div>
     );
