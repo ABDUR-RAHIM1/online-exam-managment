@@ -18,22 +18,26 @@ export default function BankPage() {
     return (
         <div className="px-4 py-8">
             <Heading text={"Bank Courses"} center={true} />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            <div className="servicesWrap">
                 {BankDemoData.map((item) => (
                     <div
                         key={item.id}
-                        className="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition duration-300 ease-in-out"
+                        className="servicesCard"
                     >
-                        <h3 className="text-xl font-semibold text-gray-800 mb-2">{item.category}</h3>
+                        <h3>{item.category}</h3>
                         <p className="text-gray-600 mb-2">{item.description}</p>
-                        <p className="text-gray-700 font-bold mb-1">Price: <span className="text-blue-600">{item.price}</span></p>
-                        <p className="text-gray-700 mb-1">Duration: {item.duration}</p>
-                        <p className="text-gray-700 mb-1">Available Seats: {item.availableSeats}</p>
-                        <p className="text-gray-700 mb-1">Start Date: {item.startDate}</p>
-                        <p className="text-gray-700 mb-1">Instructor: {item.instructor}</p>
-                        <div className="flex justify-between items-center mt-4">
-                            <span className="text-yellow-500 font-bold">Rating: {item.rating}</span>
-                            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Enroll Now</button>
+                        <p className="font-bold">
+                            Price: <span className="text-blue-600">{item.price}</span>
+                        </p>
+                        <p>Duration: {item.duration}</p>
+                        <p>Available Seats: {item.availableSeats}</p>
+                        <p>Start Date: {item.startDate}</p>
+                        <p>Instructor: {item.instructor}</p>
+                        <div className="servicesCard2">
+                            <span>Rating: {item.rating}</span>
+                            <button>
+                                Enroll Now
+                            </button>
                         </div>
                     </div>
                 ))}

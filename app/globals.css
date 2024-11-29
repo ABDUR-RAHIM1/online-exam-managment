@@ -30,9 +30,6 @@ body {
     @apply border-2 border-dotted
   }
 
-  /* .dropdownMenu li {
-    @apply w-full p-2 hover:bg-blue-600 hover:text-white
-  } */
 
   /*  common css */
   .pageWrap {
@@ -40,7 +37,7 @@ body {
   }
 
   .wrap {
-    @apply px-5 md:px-10 my-20 py-20
+    @apply px-5 md:px-10 py-20
   }
 
   .cardTitle {
@@ -53,6 +50,34 @@ body {
 
   .HomeNav a {
     @apply hover:bg-blue-500 hover:text-white px-4 py-2 rounded-md duration-200
+  }
+
+  .servicesWrap {
+    @apply flex flex-wrap justify-center sm:justify-between gap-6 mt-8
+  }
+
+  .servicesCard {
+    @apply w-full sm:w-[48%] lg:w-[31%] bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition duration-300 ease-in-out
+  }
+
+  .servicesCard h3 {
+    @apply text-xl font-semibold text-gray-800 mb-2
+  }
+
+  .servicesCard p {
+    @apply text-gray-700 mb-1
+  }
+
+  .servicesCard2 {
+    @apply flex justify-between items-center mt-4
+  }
+
+  .servicesCard2 span {
+    @apply text-yellow-500 font-bold
+  }
+
+  .servicesCard2 button {
+    @apply bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600
   }
 
   /*  common css End here*/

@@ -17,7 +17,7 @@ const BookLists = () => {
 
 
     return (
-        <div className="px-5 md:px-10 py-10 bg-gray-200 overflow-hidden">
+        <div className="px-5 md:px-10 py-10 bg-gray-50 overflow-hidden">
             <Heading text={"PDF Books"} center={true} />
             <div className=' my-16 w-full md:w-[60%] m-auto'>
                 <input type="search"
