@@ -1,16 +1,15 @@
 "use client"
+import { PostHandler } from '@/app/Handler/PostHandler';
 import React, { useState } from 'react';
 
-
-//  for user
 const RegistrationPage = () => {
+    const [loading, setLoading] = useState(false)
     const [isClick, setIsClick] = useState(false);
     const [formData, setFormData] = useState({
-        courseCategory: '',
-        name: '',
+        username: "",
         email: '',
         password: '',
-        collegeName: '',
+        accountType: 'free',
     });
 
     const handleChange = (e) => {
@@ -21,154 +20,90 @@ const RegistrationPage = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Form submitted:', formData);
+        setLoading(true);
+        const registerApi = "/user/register"
+        const loginApi = "/user/login"
 
+        try {
+
+            await PostHandler(formData, !isClick ? registerApi : loginApi);
+
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
     };
 
+
     return (
-        <div className="wrap">
-            <h1 className="text-3xl font-bold text-center mb-6">
-                {
-                    isClick ? "Login" : "Registration"
-                }
-            </h1>
-            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg px-2 md:px-5">
-                {/* Course Category Field */}
-                <div className="mb-4">
-                    <label className="block text-gray-700">Course Category:</label>
-                    <input
-                        type="text"
-                        name="courseCategory"
-                        value={formData.courseCategory}
-                        onChange={handleChange}
-                        className="input"
-                        required
-                        placeholder='Category'
-                    />
-                </div>
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600">
+            <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg">
+                <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-6">
+                    {isClick ? "Login" : "Sign Up"}
+                </h1>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    {!isClick &&
+                        <div className="mb-4">
+                            <label className="block text-gray-700 font-medium mb-2">Username:</label>
+                            <input
+                                type="text"
+                                name="username"
+                                value={formData.username}
+                                onChange={handleChange}
+                                className='input'
+                                required
+                                placeholder='Enter your Username'
+                            />
+                        </div>}
+                    <div className="mb-4">
+                        <label className="block text-gray-700 font-medium mb-2">Email:</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className='input'
+                            required
+                            placeholder='Enter your email'
+                        />
+                    </div>
 
-                {/* Name Field */}
-                <div className="mb-4">
-                    <label className="block text-gray-700">Name:</label>
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="input"
-                        required
-                        placeholder='Your Good Name'
-                    />
-                </div>
+                    <div className="mb-4">
+                        <label className="block text-gray-700 font-medium mb-2">Password:</label>
+                        <input
+                            type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            className="input"
+                            required
+                            placeholder='******'
+                        />
+                    </div>
 
-                {/* Conditional Fields */}
-                {
-                    isClick ? (
-                        <>
-                            <div className="mb-4">
-                                <label className="block text-gray-700">Email:</label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    className="input"
-                                    required
-                                    placeholder='Email'
-                                />
-                            </div>
+                    <button
+                        type="submit"
+                        className="loginBtn"
+                        disabled={loading}
+                    >
+                        {loading ? "Loading..." : (isClick ? "Login" : "Signup")}
+                    </button>
+                </form>
 
-                            <div className="mb-4">
-                                <label className="block text-gray-700">Password:</label>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    value={formData.password}
-                                    onChange={handleChange}
-                                    className="input"
-                                    required
-                                    placeholder='******'
-                                />
-                            </div>
-                        </>
-                    ) : (
-                        <>
-                            {/* All fields shown when isClick is false */}
-                            <div className="mb-4">
-                                <label className="block text-gray-700">Email:</label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    className="input"
-                                    required
-                                    placeholder='Email'
-                                />
-                            </div>
-
-                            <div className="mb-4">
-                                <label className="block text-gray-700">Password:</label>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    value={formData.password}
-                                    onChange={handleChange}
-                                    className="input"
-                                    required
-                                    placeholder='******'
-                                />
-                            </div>
-
-                            <div className="mb-4">
-                                <label className="block text-gray-700">Confirm Password:</label>
-                                <input
-                                    type="password"
-                                    name="confirmPassword"
-                                    value={formData.confirmPassword}
-                                    onChange={handleChange}
-                                    className="input"
-                                    required
-                                    placeholder='******'
-                                />
-                            </div>
-
-                            <div className="mb-4">
-                                <label className="block text-gray-700">College Name:</label>
-                                <input
-                                    type="text"
-                                    name="collegeName"
-                                    value={formData.collegeName}
-                                    onChange={handleChange}
-                                    className="input"
-                                    required
-                                    placeholder='Your College Name'
-                                />
-                            </div>
-                        </>
-                    )
-                }
-
-                <button type="submit" className="bg-blue-500 my-6 font-bold text-white py-2 px-4 rounded hover:bg-blue-600">
-                    {
-                        isClick ? " login" : " Signup"
-                    }
-                </button>
-            </form>
-            <p className="text-center mt-4">
-                {
-                    isClick ? "I have no Account ?" : " Already have an account ? "
-                }
-                <span onClick={() => setIsClick(!isClick)} className="text-blue-500 hover:underline cursor-pointer">
-                    {
-                        isClick ? " Signup Here" : " Login Here"
-                    }
-                </span>
-            </p>
+                <p className="text-center text-gray-600 mt-4">
+                    {isClick ? "Don't have an account?" : "Already have an account?"}
+                    <span
+                        onClick={() => setIsClick(!isClick)}
+                        className="text-blue-500 hover:underline cursor-pointer ml-2"
+                    >
+                        {isClick ? "Sign Up Here" : "Login Here"}
+                    </span>
+                </p>
+            </div>
         </div>
-
     );
 };
 

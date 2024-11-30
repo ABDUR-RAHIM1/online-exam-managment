@@ -3,10 +3,11 @@ import { demoProfilePhoto } from "@/app/DemoData/DemoImg";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiMenuFold3Fill } from "react-icons/ri";
 import { FaBookOpen } from "react-icons/fa";
 import ProfileNav from "./ProfileNav";
+import { toast } from "react-toastify";
 
 export default function MobileNavbar() {
     const path = usePathname();
@@ -40,6 +41,7 @@ export default function MobileNavbar() {
         { item: "Premium Account", path: "/auth" },
     ];
 
+  
     return (
         <div className="px-5 md:px-10 flex justify-between items-center py-5 bg-gray-100 sticky top-0 z-[9999] w-full">
             <Link href="/" className="text-3xl md:text-4xl italic flex items-center gap-2 font-bold hover:text-blue-500 duration-200">
@@ -96,7 +98,7 @@ export default function MobileNavbar() {
                                 href={item.path}
                                 className="block text-gray-700 hover:text-blue-500"
                             >
-                                {item.item  }
+                                {item.item}
                             </Link>
                         ))}
                     </ul>
