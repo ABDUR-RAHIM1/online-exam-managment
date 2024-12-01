@@ -1,16 +1,14 @@
-
-import { useEffect, useState } from 'react';
+// hooks/useToken.js
+import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 
-const useToken = () => {
+export const useToken = () => {
     const [token, setToken] = useState(null);
 
-    useEffect(() => {
+    useEffect(() => { 
         const token = Cookies.get('userToken');
         setToken(token);
-    }, []);
+    }, []);  
 
     return token;
-}
-
-export default useToken;
+};

@@ -1,6 +1,7 @@
 "use client"
 import { AuthPostHandler } from '@/app/Handler/usersHandler/PostHandler';
-import useToken from '@/app/hooks/useToken';
+import { useToken } from '@/app/hooks/useToken';
+// import useToken from '@/app/hooks/useToken';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';

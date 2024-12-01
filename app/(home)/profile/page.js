@@ -1,8 +1,17 @@
+
 import { demoProfilePhoto } from '@/app/DemoData/DemoImg';
+import { getDataHandler } from '@/app/Handler/usersHandler/getHandler';
 import Image from 'next/image';
 import React from 'react';
 
-export default function ProfileOverview() {
+export default async function ProfileOverview() {
+    const api = "/user/me"
+    const data = await getDataHandler(api)
+
+    console.log(data)
+
+    const { username, email, createdAt, profile } = data
+
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
             <h1 className="text-2xl font-bold mb-4">Profile Overview</h1>
