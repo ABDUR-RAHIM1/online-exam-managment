@@ -1,10 +1,27 @@
 "use client"
-import { PostHandler } from '@/app/Handler/PostHandler';
-import React, { useState } from 'react';
+import { AuthPostHandler } from '@/app/Handler/usersHandler/PostHandler';
+import useToken from '@/app/hooks/useToken';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
+// login / registration page
 const RegistrationPage = () => {
     const [loading, setLoading] = useState(false)
     const [isClick, setIsClick] = useState(false);
+    const router = useRouter();
+    const token = useToken();
+
+    useEffect(() => {
+        if (token) {
+            toast.info("Yoy Have Already Logged in!")
+            setTimeout(() => {
+                router.push("/profile")
+            }, 1500);
+        }
+    }, [token])
+
     const [formData, setFormData] = useState({
         username: "",
         email: '',
@@ -23,19 +40,35 @@ const RegistrationPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        const registerApi = "/user/register"
-        const loginApi = "/user/login"
+        const registerApi = "/user/register";
+        const loginApi = "/user/login";
 
         try {
+            // Login or register based on `isClick` state
+            const response = await AuthPostHandler(formData, isClick ? loginApi : registerApi);
 
-            await PostHandler(formData, !isClick ? registerApi : loginApi);
-
+            // Check if login was successful
+            if (response.status === 200) {
+                // Set token only for login
+                if (isClick) {  // `isClick` true হলে, এটা login ফর্ম
+                    Cookies.set("userToken", response.data.token);
+                    router.refresh()
+                    router.push('/profile');
+                } else {
+                    toast.success("Registration successful! Please log in.");
+                    setIsClick(true);  // Redirect to login form after registration
+                }
+            } else {
+                toast.error(response.message || "Operation failed!");
+            }
         } catch (error) {
             console.error(error);
+            toast.error("An unexpected error occurred!");
         } finally {
             setLoading(false);
         }
     };
+
 
 
     return (

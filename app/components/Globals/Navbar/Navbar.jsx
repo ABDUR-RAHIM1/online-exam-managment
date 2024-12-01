@@ -6,8 +6,6 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { RiMenuFold3Fill } from "react-icons/ri";
 import { FaBookOpen } from "react-icons/fa";
-import ProfileNav from "./ProfileNav";
-import { toast } from "react-toastify";
 
 export default function MobileNavbar() {
     const path = usePathname();
@@ -41,7 +39,7 @@ export default function MobileNavbar() {
         { item: "Premium Account", path: "/auth" },
     ];
 
-  
+
     return (
         <div className="px-5 md:px-10 flex justify-between items-center py-5 bg-gray-100 sticky top-0 z-[9999] w-full">
             <Link href="/" className="text-3xl md:text-4xl italic flex items-center gap-2 font-bold hover:text-blue-500 duration-200">
@@ -105,7 +103,7 @@ export default function MobileNavbar() {
                 </div>
 
                 {/* Profile Section */}
-                <div onClick={handleProfileClick} className="cursor-pointer relative">
+                <Link href={"/profile"} title="Profile" className="cursor-pointer">
                     <Image
                         src={demoProfilePhoto}
                         width={48}
@@ -113,8 +111,7 @@ export default function MobileNavbar() {
                         alt="profile photo"
                         className="rounded-full hover:rotate-6 duration-200"
                     />
-                    {isProfile && <ProfileNav isClick={isProfile} />}
-                </div>
+                </Link>
             </nav>
 
 
@@ -179,16 +176,15 @@ export default function MobileNavbar() {
                     </div>
 
                     {/* Profile Section */}
-                    <div onClick={handleProfileClick} className="cursor-pointer relative text-xl font-medium hover:text-blue-500 duration-200 mt-4">
+                    <Link href={"/profile"} title="Profile" className="cursor-pointer">
                         <Image
                             src={demoProfilePhoto}
-                            width={200}
-                            height={200}
+                            width={48}
+                            height={48}
                             alt="profile photo"
-                            className="w-12 h-12 rounded-full hover:rotate-6 duration-200"
+                            className="rounded-full hover:rotate-6 duration-200"
                         />
-                        <ProfileNav isClick={isProfile} />
-                    </div>
+                    </Link>
                 </div>
             )}
         </div>

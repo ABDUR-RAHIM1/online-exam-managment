@@ -1,10 +1,12 @@
 "use client";
+import Cookies from "js-cookie";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowForward, IoIosClose } from "react-icons/io";
 
 export default function ProfileSidebar() {
+    const router = useRouter()
     const path = usePathname();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const profileItems = [
@@ -17,22 +19,36 @@ export default function ProfileSidebar() {
         { name: "Profile Settings", path: "/profile/settings" },
         { name: "Payment History", path: "/profile/payment-history" },
         { name: "Support & FAQs", path: "/profile/support" },
-        { name: "Logout", path: "/logout" },
     ];
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen); // Toggle sidebar open/close
     };
 
+    const handleLogOut = () => {
+        Cookies.remove("userToken")
+        setTimeout(() => {
+            router.push('/')
+        }, 1000);
+    }
+
     return (
         <div className="relative h-screen overflow-y-auto md:w-[22%]">
+
             {/* Arrow button to open sidebar on mobile */}
             <span
                 onClick={toggleSidebar}
-                className="text-2xl z-[8888] fixed top-[5rem] left-0 cursor-pointer bg-blue-700 px-3 py-2 md:hidden flex items-center text-white"
+                className={`${sidebarOpen ? "bg-red-500" : "bg-blue-600"} text-2xl z-[8888] fixed top-[5rem] left-0 cursor-pointer  px-3 py-2 md:hidden flex items-center text-white`}
             >
-                Profile
-                <IoIosArrowForward className="cursor-pointer" />
+                {sidebarOpen ? (
+                    <>
+                        <IoIosClose className="cursor-pointer text-white" />
+                    </>
+                ) : (
+                    <>
+                        <IoIosArrowForward className="cursor-pointer text-2xl text-white" />
+                    </>
+                )}
             </span>
 
             {/* Sidebar */}
@@ -45,13 +61,16 @@ export default function ProfileSidebar() {
                         <li key={index}>
                             <Link
                                 href={service.path}
-                                className={`block py-2 px-3 rounded hover:bg-blue-700 transition-colors duration-200 ${path === service.path ? "bg-blue-700" : ""
+                                className={`block py-2 px-3 rounded text-white hover:bg-blue-700 transition-colors duration-200 ${path === service.path ? "bg-blue-700" : ""
                                     }`}
                             >
                                 {service.name}
                             </Link>
                         </li>
                     ))}
+                    <button onClick={handleLogOut} className="w-full py-3 px-5 bg-red-600 text-white my-6 font-bold hover:scale-105 duration-200">
+                        Log Out
+                    </button>
                 </ul>
             </aside>
         </div>
