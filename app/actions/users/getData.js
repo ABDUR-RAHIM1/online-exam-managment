@@ -1,3 +1,4 @@
+"use server"
 import { API_URL } from "@/app/constans/constans";
 import userToken from "@/app/actions/users/getToken";
 
@@ -5,7 +6,7 @@ export const getDataHandler = async (endpoint) => {
     const token = userToken();
 
     if (!token) {
-        console.error("No token available"); 
+        console.error("No token available");
     }
 
     try {
@@ -20,7 +21,7 @@ export const getDataHandler = async (endpoint) => {
 
         const result = await response.json();
 
-        return { status: response.status, result }; 
+        return { status: response.status, result };
 
     } catch (error) {
         console.error("Fetch Error: ", error);

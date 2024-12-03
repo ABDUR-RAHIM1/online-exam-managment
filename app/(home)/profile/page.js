@@ -1,16 +1,22 @@
 
+import { getDataHandler } from '@/app/actions/users/getData';
+import NotFound from '@/app/components/Globals/NotFound';
 import { demoProfilePhoto } from '@/app/DemoData/DemoImg';
-import { getDataHandler } from '@/app/Handler/usersHandler/getHandler';
 import Image from 'next/image';
 import React from 'react';
 
 export default async function ProfileOverview() {
-    const api = "/user/me"
-    const data = await getDataHandler(api)
+    const api = "/user/me";
+    const { status, result } = await getDataHandler(api);
 
-    console.log(data)
+    // Handle errors and missing user data
+    if (status !== 200 || !result) {
+        return <NotFound page={"user"} />;
+    }
 
-    const { username, email, createdAt, profile } = data
+    // Destructure user data
+    const { username, email, createdAt, profile, courses } = result;
+    const { bio, photo, contactNumber, address, skills, experience, jobPreferences } = profile;
 
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
@@ -22,7 +28,7 @@ export default async function ProfileOverview() {
                     {/* Profile Picture */}
                     <div className="flex items-center mb-4">
                         <Image
-                            src={demoProfilePhoto}
+                            src={photo || demoProfilePhoto}  // Conditional rendering
                             width={200}
                             height={200}
                             alt="Profile"
@@ -35,22 +41,28 @@ export default async function ProfileOverview() {
                     <div className="mb-4">
                         <h2 className="text-xl font-semibold mb-2">Profile Information</h2>
                         <div className="bg-gray-100 p-4 rounded-md">
-                            <p className="font-medium">Name: <span className="font-normal">John Doe</span></p>
-                            <p className="font-medium">Email: <span className="font-normal">johndoe@example.com</span></p>
-                            <p className="font-medium">Phone: <span className="font-normal">+1234567890</span></p>
+                            <p className="font-medium">Name: <span className="font-normal">{username || "N/A"}</span></p>
+                            <p className="font-medium">Email: <span className="font-normal">{email || "N/A"}</span></p>
+                            <p className="font-medium">Contact: <span className="font-normal">{contactNumber || "N/A"}</span></p>
+                            <p className="font-medium">Address: <span className="font-normal">{address || "N/A"}</span></p>
+                            <p className="font-medium">Joined: <span className="font-normal">{new Date(createdAt).toLocaleDateString() || "N/A"}</span></p>
                         </div>
                     </div>
+
+                    {/*  profile information from datasbase */}
 
                     {/* Bio */}
                     <h2 className="text-xl font-semibold mb-2">Bio</h2>
                     <div className="bg-gray-100 p-4 rounded-md mb-4">
-                        <p className="font-normal">Dedicated job seeker focusing on BCS and banking examinations. Committed to achieving success through thorough preparation and strategic planning.</p>
+                        <p className="font-normal">
+                            {bio || "N?A"}
+                        </p>
                     </div>
 
                     {/* Skills */}
                     <h2 className="text-xl font-semibold mb-2">Relevant Skills</h2>
                     <div className="bg-gray-100 p-4 rounded-md mb-4 flex flex-wrap">
-                        {['Analytical Skills', 'General Knowledge', 'Logical Reasoning', 'Verbal Ability'].map((skill, index) => (
+                        {skills.map((skill, index) => (
                             <span key={index} className="bg-blue-200 text-blue-800 text-sm font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded">{skill}</span>
                         ))}
                     </div>
@@ -58,8 +70,7 @@ export default async function ProfileOverview() {
                     {/* Experience */}
                     <h2 className="text-xl font-semibold mb-2">Preparation Experience</h2>
                     <div className="bg-gray-100 p-4 rounded-md mb-4">
-                        <p className="font-medium">Self-Studying for BCS Examination</p>
-                        <p className="font-normal">January 2023 - Present</p>
+                        <p className="font-medium">{experience || "N?A"}</p>
                     </div>
                 </div>
 
@@ -77,16 +88,15 @@ export default async function ProfileOverview() {
                         <p className="font-normal">Certified in Banking and Financial Services</p>
                     </div>
 
-                    {/* Social Media Links */}
-                    <h2 className="text-xl font-semibold mb-2">Social Media Links</h2>
-                    <div className="bg-gray-100 p-4 rounded-md mb-4">
-                        <p className="font-normal">LinkedIn: <a href="#" className="text-blue-500">linkedin.com/in/johndoe</a></p>
-                    </div>
 
                     {/* Job Preferences */}
                     <h2 className="text-xl font-semibold mb-2">Job Preferences</h2>
                     <div className="bg-gray-100 p-4 rounded-md mb-4">
-                        <p className="font-normal">Seeking opportunities in BCS and Bank jobs. Open to other government positions in Bangladesh.</p>
+                        <p className="font-normal">
+                            {
+                                jobPreferences || "N?A"
+                            }
+                        </p>
                     </div>
 
                     {/* Upcoming Exams */}

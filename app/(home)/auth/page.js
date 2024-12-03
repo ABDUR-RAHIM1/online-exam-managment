@@ -52,7 +52,7 @@ const RegistrationPage = () => {
             if (response.status === 200) {
                 // Set token only for login
                 if (isClick) {  // `isClick` true হলে, এটা login ফর্ম
-                    Cookies.set("userToken", response.data.token);
+                    Cookies.set("userToken", response.data.token, { expires: 2000 });
                     router.refresh()
                     router.push('/profile');
                 } else {
