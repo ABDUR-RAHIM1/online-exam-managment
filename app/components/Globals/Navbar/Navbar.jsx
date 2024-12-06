@@ -10,18 +10,15 @@ import { FaBookOpen } from "react-icons/fa";
 export default function MobileNavbar() {
     const path = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isProfile, setIsProfile] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null); // Track open dropdown
 
-    const handleProfileClick = () => {
-        setIsProfile(!isProfile);
-    };
 
     const toggleDropdown = (dropdown) => {
         setOpenDropdown(openDropdown === dropdown ? null : dropdown);
     };
 
     const items = [
+        { item: "About Us", path: "/about" },
         { item: "Live Exam", path: "/live-exam" },
         { item: "Books", path: "/book-lists" },
     ];

@@ -49,7 +49,7 @@ const AddProfile = () => {
         <div className='w-full bg-gray-50 py-10'>
             <div className="p-4 max-w-lg mx-auto shadow-xl ">
                 <h2 className="text-xl font-semibold mb-4">Add Profile</h2>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} enctype="multipart/form-data">
                     <div className="mb-4">
                         <label className="block font-medium">Profile Picture</label>
                         <input name="photo" type='file' onChange={handleChange} required className="input" />
