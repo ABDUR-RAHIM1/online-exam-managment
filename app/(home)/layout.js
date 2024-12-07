@@ -5,6 +5,7 @@ import Navbar from "../components/Globals/Navbar/Navbar";
 import "../globals.css"
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import Context from "../contextApi/Context";
 
 export const metadata = {
   title: "Online Exam",
@@ -15,10 +16,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body >
-        <Navbar />
-        <ToastContainer />
-        {children}
-        <Footer />
+        <Context>
+          <Navbar />
+          <ToastContainer />
+          {children}
+          <Footer />
+        </Context>
       </body>
     </html>
   );

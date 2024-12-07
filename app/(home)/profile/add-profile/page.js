@@ -1,9 +1,14 @@
 "use client"
 import { postDataHandler } from '@/app/actions/users/postData';
-import React, { useState } from 'react';
+import { contextApi } from '@/app/contextApi/Context';
+import fileUploader from '@/app/helpers/fileUploader';
+import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 const AddProfile = () => {
+    const { manageData } = useContext(contextApi);
+    const { uploader, uploadResponse, imgUrl } = fileUploader();
+    const { message, status } = uploadResponse;
     const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
         photo: "",
@@ -15,9 +20,28 @@ const AddProfile = () => {
         jobPreferences: '',
     });
 
+
+    useEffect(() => {
+        if (manageData !== null) {
+            setFormData(manageData);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (imgUrl !== "") {
+            setFormData({
+                ...formData,
+                photo: imgUrl
+            })
+        }
+    }, [imgUrl])
+    console.log(formData)
     // Handle form field changes
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { type, name, value, files } = e.target;
+        if (type === "file") {
+            uploader(files[0])
+        }
         setFormData({ ...formData, [name]: value });
     };
 
@@ -45,14 +69,25 @@ const AddProfile = () => {
         }
     };
 
+    const getStatusClass = (status) => {
+        if (status === 102) return "text-yellow-500";
+        if (status === 200) return "text-green-600";
+        if (!status) return "text-black";
+        return "text-red-500";
+    };
+
     return (
         <div className='w-full bg-gray-50 py-10'>
             <div className="p-4 max-w-lg mx-auto shadow-xl ">
                 <h2 className="text-xl font-semibold mb-4">Add Profile</h2>
-                <form onSubmit={handleSubmit} enctype="multipart/form-data">
+                <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label className="block font-medium">Profile Picture</label>
-                        <input name="photo" type='file' onChange={handleChange} required className="input" />
+                        <label className="block font-medium">
+                            <p className={getStatusClass(status)}>
+                                {message || "profile Photo"}
+                            </p>
+                        </label>
+                        <input type='file' onChange={handleChange} required className="input" />
                     </div>
                     <div className="mb-4">
                         <label className="block font-medium">Bio</label>

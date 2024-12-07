@@ -4,6 +4,7 @@ import NotFound from '@/app/components/Globals/NotFound';
 import { demoProfilePhoto } from '@/app/DemoData/DemoImg';
 import Image from 'next/image';
 import React from 'react';
+import ActionsBtn from './ActionsBtn';
 
 export default async function ProfileOverview() {
     const api = "/user/me";
@@ -17,6 +18,9 @@ export default async function ProfileOverview() {
     // Destructure user data
     const { username, email, createdAt, profile, courses } = result;
     const { bio, photo, contactNumber, address, skills, experience, jobPreferences } = profile;
+
+
+
 
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
@@ -78,8 +82,7 @@ export default async function ProfileOverview() {
                 <div className="md:w-1/2">
                     <h2 className="text-xl font-semibold mb-2">Actions</h2>
                     <div className="bg-gray-100 p-4 rounded-md mb-4">
-                        <button className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200">Edit Profile</button>
-                        <button className="w-full bg-red-500 text-white py-2 rounded-md mt-2 hover:bg-red-600 transition duration-200">Delete Account</button>
+                        <ActionsBtn data={result.profile} />
                     </div>
 
                     {/* Certifications */}
